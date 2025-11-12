@@ -1,0 +1,729 @@
+/* ========================================
+   HCT Voice Agent - Complete Styles
+   FIXED: Caption quality + Glow sync
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rethink Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #212121;
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ========================================
+   LOADING SCREENS
+   ======================================== */
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #212121;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.loading-screen.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.logo-container,
+.menu-logo-container {
+    margin-bottom: 40px;
+}
+
+.loading-logo,
+.menu-logo {
+    width: 250px;
+    height: 250px;
+    border-radius: 130px;
+    object-fit: cover;
+}
+
+.footer-text {
+    position: absolute;
+    bottom: 30px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+/* ========================================
+   MAIN MENU
+   ======================================== */
+
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.menu-text h1 {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.5;
+}
+
+.menu-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.mode-select-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s ease;
+    position: relative;
+}
+
+.mode-select-btn img {
+    width: 200px;
+    height: auto;
+    display: block;
+}
+
+.mode-select-btn .btn-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.mode-select-btn:hover .btn-hover {
+    opacity: 1;
+}
+
+.mode-select-btn:hover {
+    transform: scale(1.05);
+}
+
+/* ========================================
+   MODE CONTAINERS
+   ======================================== */
+
+.mode-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #212121;
+    display: none;
+    flex-direction: column;
+}
+
+.mode-container.active {
+    display: flex;
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    transition: opacity 0.2s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.close-btn:hover {
+    opacity: 0.7;
+}
+
+.close-btn svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ========================================
+   VOICE MODE - MAIN CONTENT
+   ======================================== */
+
+.voice-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    gap: 40px;
+}
+
+/* ========================================
+   LOGO WRAPPER - SYNCED RED GLOW + SCALE
+   ======================================== */
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin-bottom: 30px;
+}
+
+.hct-logo {
+    width: 250px;
+    height: 250px;
+    border-radius: 130px;
+    object-fit: cover;
+    position: relative;
+    z-index: 3;
+    transition: transform 0.1s ease-out;
+}
+
+/* SPEAKING STATE - SYNCED RED GLOW + SCALE */
+.logo-wrapper.speaking .hct-logo {
+    animation: logo-glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes logo-glow-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 40px rgba(237, 28, 36, 0.6)) drop-shadow(0 0 80px rgba(237, 28, 36, 0.4)) drop-shadow(0 0 120px rgba(237, 28, 36, 0.2));
+    }
+
+    50% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 60px rgba(237, 28, 36, 0.8)) drop-shadow(0 0 120px rgba(237, 28, 36, 0.6)) drop-shadow(0 0 180px rgba(237, 28, 36, 0.3));
+    }
+}
+
+/* Thinking state - subtle pulse */
+.logo-wrapper.thinking .hct-logo {
+    animation: thinking-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes thinking-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.04);
+        opacity: 0.9;
+    }
+}
+
+/* ========================================
+   LIVE CAPTION - RETHINK SANS SEMIBOLD WHITE
+   ======================================== */
+
+.live-caption {
+    background: transparent;
+    padding: 24px 32px;
+    max-width: 700px;
+    width: 90%;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+
+    /* CRITICAL: Rethink Sans Semibold */
+    font-family: 'Rethink Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600;
+    /* Semibold - MUST BE 600 */
+    font-size: 22px;
+    line-height: 1.5;
+    color: #FFFFFF;
+    /* Pure white */
+    letter-spacing: -0.01em;
+
+    /* SHARP TEXT RENDERING */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1;
+    -webkit-text-stroke: 0;
+
+    /* GPU acceleration without blur */
+    will-change: transform, opacity;
+    transform: translateY(20px) translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    /* Remove text shadow for pure white */
+    text-shadow: none;
+}
+
+.live-caption.active {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+}
+
+/* ========================================
+   MICROPHONE - CIRCLE WITH ASSET
+   ======================================== */
+
+.mic-section {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.mic-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0;
+}
+
+.mic-button:hover {
+    transform: scale(1.05);
+}
+
+.mic-button:active {
+    transform: scale(0.95);
+}
+
+/* Circle container with 35% opacity + white stroke 40% */
+.mic-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Mic icon from assets */
+.mic-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+}
+
+.mic-button.recording .mic-circle {
+    animation: mic-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes mic-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* ========================================
+   STATUS TEXT
+   ======================================== */
+
+.status-text {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+}
+
+/* ========================================
+   TEXT MODE
+   ======================================== */
+
+.chat-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.welcome-message {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.welcome-message.hidden {
+    display: none;
+}
+
+.welcome-message h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.welcome-message p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chat-message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.chat-message.user {
+    align-items: flex-end;
+}
+
+.chat-message.assistant {
+    align-items: flex-start;
+}
+
+.message-bubble {
+    max-width: 70%;
+    padding: 14px 18px;
+    border-radius: 18px;
+    font-size: 16px;
+    line-height: 1.5;
+    position: relative;
+}
+
+.chat-message.user .message-bubble {
+    background: #303030;
+    color: #fff;
+}
+
+.chat-message.assistant .message-bubble {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ========================================
+   MESSAGE ACTIONS - ChatGPT Style
+   ======================================== */
+
+.message-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 0;
+}
+
+/* USER: Hover only */
+.chat-message.user .message-actions {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.chat-message.user:hover .message-actions {
+    opacity: 1;
+}
+
+/* ASSISTANT: Always visible */
+.chat-message.assistant .message-actions {
+    opacity: 1;
+}
+
+.message-action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.message-action-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: rgba(255, 255, 255, 0.4);
+    fill: none;
+    transition: all 0.2s ease;
+}
+
+.message-action-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.message-action-btn:hover svg {
+    stroke: rgba(255, 255, 255, 0.9);
+}
+
+.message-action-btn.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.message-action-btn.active svg {
+    stroke: #fff;
+}
+
+/* Thumbs icons */
+.message-action-btn.thumb svg {
+    fill: rgba(255, 255, 255, 0.4);
+    stroke: none;
+}
+
+.message-action-btn.thumb:hover svg {
+    fill: rgba(255, 255, 255, 0.9);
+}
+
+.message-action-btn.thumb.active svg {
+    fill: #fff;
+}
+
+.message-action-btn.thumb-up.active {
+    background: rgba(52, 199, 89, 0.15);
+    border-color: rgba(52, 199, 89, 0.3);
+}
+
+.message-action-btn.thumb-up.active svg {
+    fill: #34C759;
+}
+
+.message-action-btn.thumb-down.active {
+    background: rgba(255, 59, 48, 0.15);
+    border-color: rgba(255, 59, 48, 0.3);
+}
+
+.message-action-btn.thumb-down.active svg {
+    fill: #FF3B30;
+}
+
+.thinking-indicator {
+    display: none;
+    gap: 6px;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    width: fit-content;
+}
+
+.thinking-indicator.visible {
+    display: flex;
+}
+
+.thinking-indicator .dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: thinking-bounce 1.4s infinite ease-in-out both;
+}
+
+.thinking-indicator .dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.thinking-indicator .dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes thinking-bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* ========================================
+   TEXT INPUT
+   ======================================== */
+
+.text-input-container {
+    padding: 20px 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+#messageInput {
+    flex: 1;
+    background: #303030;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 14px 20px;
+    font-size: 16px;
+    color: #fff;
+    font-family: 'Rethink Sans', sans-serif;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+#messageInput:focus {
+    background: #303030;
+    border-color: #007AFF;
+}
+
+#messageInput::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.input-icon-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #303030;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.input-icon-btn:hover {
+    background: #404040;
+    transform: scale(1.05);
+}
+
+.input-icon-btn:active {
+    transform: scale(0.95);
+}
+
+.input-icon-btn svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.mode-footer {
+    padding: 16px;
+    text-align: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+.chat-area::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-area::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.chat-area::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.chat-area::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .menu-text h1 {
+        font-size: 20px;
+        padding: 0 20px;
+    }
+
+    .menu-buttons {
+        flex-direction: column;
+    }
+
+    .mode-select-btn img {
+        width: 160px;
+    }
+
+    .logo-wrapper {
+        width: 230px;
+        height: 230px;
+    }
+
+    .hct-logo {
+        width: 200px;
+        height: 200px;
+    }
+
+    .message-bubble {
+        max-width: 85%;
+    }
+}
